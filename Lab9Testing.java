@@ -10,15 +10,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+//SQL imports
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class Lab9Testing extends Application
 
    {
       
-      private TextField username;
-      private TextField password;
-      
+      private TextField usernameField;
+      private TextField passwordField;
       
       private Label usernameLabel;
       private Label passwordLabel;
@@ -28,6 +32,7 @@ public class Lab9Testing extends Application
          {
          
             launch(args); 
+            
          }
       
       @Override
@@ -40,15 +45,19 @@ public class Lab9Testing extends Application
             
             Label passwordLabel = new Label("Password:");
             
-            username = new TextField("");
+            usernameField = new TextField("");
             
-            password = new TextField("");
+            passwordField = new TextField("");
             
-            HBox usernameHBox = new HBox(10, usernameLabel, username);
+            Button loginButton = new Button("Login");
             
-            HBox passwordHBox = new HBox(10, passwordLabel, password);
+            loginButton.setOnAction(new LoginButtonHandler());
             
-            VBox loginBox = new VBox(10, usernameHBox, passwordHBox);
+            HBox usernameHBox = new HBox(10, usernameLabel, usernameField);
+            
+            HBox passwordHBox = new HBox(10, passwordLabel, passwordField);
+            
+            VBox loginBox = new VBox(10, usernameHBox, passwordHBox, loginButton);
             
             usernameHBox.setAlignment(Pos.CENTER);
             
@@ -60,15 +69,58 @@ public class Lab9Testing extends Application
             
             primaryStage.setScene(loginScene);
             
-            primaryStage.setHeight(500);
+            primaryStage.setHeight(200);
             
-            primaryStage.setWidth(500);
+            primaryStage.setWidth(400);
             
-            primaryStage.setTitle("Lab 9");
+            primaryStage.setTitle("Yeet");
             
             primaryStage.show();
             
-            
       }
+      
+      class LoginButtonHandler implements EventHandler<ActionEvent>
+         {
+         
+            @Override
+            
+            public void handle(ActionEvent event)
+            
+            { 
+            
+               // Delcare JDBC objects
+               Connection con = null;
+               Statement stmt = null;
+               ResultSet rs = null;
+               
+               try
+               {
+               
+                  Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDrier");
+               
+                  String userName = usernameField.getText();
+                  String password = passwordField.getText();
+                  String url  = "jdbc:sqlserver://sql1.cis.mc3.edu"+";databaseName=<DATABASE NAME>";
+                  con = DriverManager.getConnection(url, userName, password);
+                  stmt = con.createStatement();
+                  rs = stmt.executeQuery("SELECT * FROM Welcome Where Students_Name = 'Instructor'");
+            
+               }
+               catch(Exception e)
+               {
+                  
+                  e.printStackTrace();
+                  
+               }
+               
+               
+               
+               
+            
+            }
+            
+
+      }
+
       
 }
