@@ -87,7 +87,7 @@ public class Lab9Testing extends Application
             public void handle(ActionEvent event)
             
             { 
-            
+               //CIS11B is database name
                // Delcare JDBC objects
                Connection con = null;
                Statement stmt = null;
