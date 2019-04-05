@@ -17,7 +17,6 @@ public class Lab9SQLTest
    {
    
       final String DatabaseURL = "sql1.cis.mc3.edu";
-   
       
       try
       {
@@ -30,8 +29,16 @@ public class Lab9SQLTest
       String sqlStatement = "SELECT Student_FullName FROM Student";
       System.out.println("Statement created: " + stmt);
       
-      ResultSet result = stmt.ExecuteQuery(sqlStatement);
+      ResultSet result = stmt.executeQuery(sqlStatement);
       
+      while(result.next())
+      {
+      
+         System.out.println(result.getString(""));
+      
+      }
+      
+      conn.close();
       
       }
       catch(Exception e)
