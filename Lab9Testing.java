@@ -82,43 +82,45 @@ public class Lab9Testing extends Application
       class LoginButtonHandler implements EventHandler<ActionEvent>
          {
          
-            @Override
             
             public void handle(ActionEvent event)
             
-            { 
-               //CIS11B is database name
-               // Delcare JDBC objects
-               Connection con = null;
-               Statement stmt = null;
-               ResultSet rs = null;
-               
-               try
-               {
-               
-                  Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDrier");
-               
-                  String userName = usernameField.getText();
-                  String password = passwordField.getText();
-                  String url  = "jdbc:sqlserver://sql1.cis.mc3.edu"+";databaseName=<DATABASE NAME>";
-                  con = DriverManager.getConnection(url, userName, password);
-                  stmt = con.createStatement();
-                  rs = stmt.executeQuery("SELECT * FROM Welcome Where Students_Name = 'Instructor'");
+            {
+   
+            final String DatabaseURL = "sql1.cis.mc3.edu";
             
-               }
-               catch(Exception e)
-               {
-                  
-                  e.printStackTrace();
-                  
-               }
-               
-               
-               
-               
+            try
+            {
+            // Create connection to SQL
+            Connection conn = DriverManager.getConnection(DatabaseURL);
+            System.out.println("Connected to: " + DatabaseURL);
+            
+            Statement stmt = conn.createStatement();
+            
+            String sqlStatement = "SELECT Student_FullName FROM Student";
+            System.out.println("Statement created: " + stmt);
+            
+            ResultSet result = stmt.executeQuery(sqlStatement);
+            
+            while(result.next())
+            {
+            
+               System.out.println(result.getString(""));
             
             }
             
+            conn.close();
+            
+            }
+            catch(Exception e)
+            {
+               
+               System.out.println(e);
+            
+            }
+         
+         
+         }            
 
       }
 
