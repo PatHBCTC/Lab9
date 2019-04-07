@@ -11,10 +11,10 @@ import javafx.scene.control.Button;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 //SQL imports
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
+
+
 
 
 public class Lab9Testing extends Application
@@ -86,26 +86,32 @@ public class Lab9Testing extends Application
             public void handle(ActionEvent event)
             
             {
+            
+            Connection conn = null;
+            Statement stmt = null;
+            ResultSet result = null;
    
-            final String DatabaseURL = "sql1.cis.mc3.edu";
+            String DatabaseURL = "jdbc:sqlserver://sql1.cis.mc3.edu" + ";databaseName = CIS111B";
+            String user = "CIS111BUser";
+            String pass = "CIS111Bpass;";
             
             try
             {
             // Create connection to SQL
-            Connection conn = DriverManager.getConnection(DatabaseURL);
+            conn = DriverManager.getConnection(DatabaseURL, user, pass);
             System.out.println("Connected to: " + DatabaseURL);
             
-            Statement stmt = conn.createStatement();
+            stmt = conn.createStatement();
             
-            String sqlStatement = "SELECT Student_FullName FROM Student";
+            String sqlStatement = "SELECT * FROM Sys_Login_Audit";
             System.out.println("Statement created: " + stmt);
             
-            ResultSet result = stmt.executeQuery(sqlStatement);
+            result = stmt.executeQuery(sqlStatement);
             
             while(result.next())
             {
             
-               System.out.println(result.getString(""));
+               System.out.println(result.getString("what's the meaning of life sgt?"));
             
             }
             
