@@ -103,7 +103,7 @@ public class Lab9Testing extends Application
             
             stmt = conn.createStatement();
             
-            String sqlStatement = "SELECT * FROM Sys_Login_Audit";
+            String sqlStatement = "SELECT Student_FullName FROM Student";
             System.out.println("Statement created: " + stmt);
             
             result = stmt.executeQuery(sqlStatement);
@@ -111,7 +111,7 @@ public class Lab9Testing extends Application
             while(result.next())
             {
             
-               System.out.println(result.getString("what's the meaning of life sgt?"));
+               System.out.println(result.getString(1));
             
             }
             
