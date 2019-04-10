@@ -10,10 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+import javax.swing.*;
 //SQL imports
 import java.sql.*;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
-
 
 
 
@@ -26,6 +26,7 @@ public class Lab9Testing extends Application
       
       private Label usernameLabel;
       private Label passwordLabel;
+      
       
       public static void main(String[] args)
       
@@ -92,8 +93,12 @@ public class Lab9Testing extends Application
             ResultSet result = null;
    
             String DatabaseURL = "jdbc:sqlserver://sql1.cis.mc3.edu" + ";databaseName = CIS111B";
-            String user = "CIS111BUser";
-            String pass = "CIS111Bpass;";
+            
+            String user = usernameField.getText();
+            String pass = passwordField.getText();
+            
+            //if statement for joption 
+            
             
             try
             {
@@ -108,12 +113,12 @@ public class Lab9Testing extends Application
             
             result = stmt.executeQuery(sqlStatement);
             
-            while(result.next())
-            {
+               while(result.next())
+               {
             
-               System.out.println(result.getString(1));
+                  System.out.println(result.getString(1));
             
-            }
+               }
             
             conn.close();
             
@@ -121,7 +126,8 @@ public class Lab9Testing extends Application
             catch(Exception e)
             {
                
-               System.out.println(e);
+               JOptionPane.showMessageDialog(null, e);
+               
             
             }
          
