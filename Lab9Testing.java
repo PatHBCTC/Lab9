@@ -126,7 +126,7 @@ public class Lab9Testing extends Application
             catch(Exception e)
             {
                
-               JOptionPane.showMessageDialog(null, e);
+               JOptionPane.showMessageDialog(null, "Error: \n" + e);
                
             
             }
