@@ -108,7 +108,8 @@ public class Lab9Testing extends Application
             
             stmt = conn.createStatement();
             
-            String sqlStatement = "SELECT Student_FullName FROM Student";
+            //INSERT INTO Sys_Login_Audit (Audit_ID, User_ID, Dte_Time_Stmp, Student_Init) " + "VALUES (NEWID(), 'CIS111BUser', GETDATE(), 'MRS')"
+            String sqlStatement = "SELECT * FROM Student WHERE Student_FullName = '<SELECTED FROM DROP-DOWN>'";
             System.out.println("Statement created: " + stmt);
             
             result = stmt.executeQuery(sqlStatement);
