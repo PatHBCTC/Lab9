@@ -78,14 +78,28 @@ public class Lab9Testing extends Application
             
             primaryStage.show();
             
-      }
+            //ComboBox
+            
+            //ComboBox<String> comboBox = new ComboBox<>();
+            
+         }
       
-      class LoginButtonHandler implements EventHandler<ActionEvent>
+         // class ComboBoxHandler implements EventHandler<ActionEvent>
+//          {
+//       
+//             public void handle(Action event)
+//             {
+//          
+//             
+//          
+//             }
+//       
+//          }
+      
+         class LoginButtonHandler implements EventHandler<ActionEvent>
          {
          
-            
             public void handle(ActionEvent event)
-            
             {
             
             Connection conn = null;
@@ -95,10 +109,7 @@ public class Lab9Testing extends Application
             String DatabaseURL = "jdbc:sqlserver://sql1.cis.mc3.edu" + ";databaseName = CIS111B";
             
             String user = usernameField.getText();
-            String pass = passwordField.getText();
-            
-            //if statement for joption 
-            
+            String pass = passwordField.getText(); 
             
             try
             {
@@ -109,31 +120,32 @@ public class Lab9Testing extends Application
             stmt = conn.createStatement();
             
             //INSERT INTO Sys_Login_Audit (Audit_ID, User_ID, Dte_Time_Stmp, Student_Init) " + "VALUES (NEWID(), 'CIS111BUser', GETDATE(), 'MRS')"
-            String sqlStatement = "SELECT * FROM Student WHERE Student_FullName = '<SELECTED FROM DROP-DOWN>'";
+            String sqlStatement = "SELECT Student_FullName FROM Student";
             System.out.println("Statement created: " + stmt);
             
             result = stmt.executeQuery(sqlStatement);
             
-               while(result.next())
-               {
+            while(result.next())
+            {
             
-                  System.out.println(result.getString(1));
+               System.out.println(result.getString(1));
             
-               }
+            }
             
             conn.close();
             
             }
+            
             catch(Exception e)
             {
-               
+            
                JOptionPane.showMessageDialog(null, "Error: \n" + e);
-               
             
             }
-         
-         
-         }            
+            
+            
+            
+            }            
 
       }
 
